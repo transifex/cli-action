@@ -1,0 +1,30 @@
+name: Transifex CLI action
+description: Invoke the Transifex CLI as part of a Github action
+branding:
+  icon: globe
+  color: blue
+inputs:
+  version:
+    description: The version of the Transifex CLI to use
+    required: true
+    default: 'latest'
+  args:
+    description: What arguments to pass to the CLI
+    required: true
+    default: 'push'
+  token:
+    description: Transifex API token to use
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Create temporary directory to store the CLI
+      run: mkdir /tmp/tx
+      shell: bash
+    - name: Download the CLI
+      run: curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash -s -- ${{ inputs.version }}
+      working-directory: /tmp/tx
+      shell: bash
+    - name: Invoke the CLI with the provided token and arguments
+      run: /tmp/tx/tx --token ${{ inputs.token }} ${{ inputs.args }}
+      shell: bash
