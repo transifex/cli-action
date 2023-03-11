@@ -19,7 +19,7 @@ runs:
   using: 'composite'
   steps:
     - name: Create temporary directory to store the CLI
-      run: mkdir /tmp/tx
+      run: mkdir -p /tmp/tx
       shell: bash
     - name: Download the CLI
       run: curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash -s -- ${{ inputs.version }}
