@@ -27,7 +27,7 @@ Integrate the Transifex CLI within a Github action. Usage:
          - name: Checkout
            uses: actions/checkout@v2
          - name: Push source file using transifex client
-           uses: transifex/cli-action@v1
+           uses: transifex/cli-action@v2
            with:
              token: ${{ secrets.TX_TOKEN }}
    ```
